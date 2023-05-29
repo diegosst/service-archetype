@@ -1,0 +1,25 @@
+version: '3'
+services:
+  rabbitmq:
+    container_name: ${SERVICE_NAME:-archetype-service}-rabbitmq
+    image: 'rabbitmq:management'
+    environment:
+        - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-guest}
+        - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PWD:-guest}
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+  mongodb:
+    container_name: ${SERVICE_NAME:-archetype-service}-mongodb
+    image: 'mongo'
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-admin}
+        - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PWD:-admin}
+    ports:
+      - '27017:27017'
+  service:
+    container_name: ${SERVICE_NAME:-archetype-service}
+    restart: 'always'
+    build: .
+    ports:
+      - '9000:8080'

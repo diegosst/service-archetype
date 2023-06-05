@@ -2,7 +2,10 @@ spring:
   component-scan:
     base-package: ${SCAN_BASE_PACKAGE:br.com.diegosst.archetype}
   rabbitmq:
-    uri: amqp://${RABBITMQ_USER:guest}:${RABBITMQ_PWD:guest}@${RABBITMQ_HOST:localhost}:${RABBITMQ_PORT:5672}
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PWD:guest}
   data:
     mongodb:
       uri: mongodb://${MONGO_USER:admin}:${MONGO_PWD:admin}@${MONGO_HOST:localhost}:${MONGO_PORT:27017}/${MONGO_DB_NAME:archetype-service}

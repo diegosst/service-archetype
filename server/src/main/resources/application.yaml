@@ -6,6 +6,10 @@ spring:
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USER:guest}
     password: ${RABBITMQ_PWD:guest}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
   data:
     mongodb:
       uri: mongodb://${MONGO_USER:admin}:${MONGO_PWD:admin}@${MONGO_HOST:localhost}:${MONGO_PORT:27017}/${MONGO_DB_NAME:archetype-service}
+      auto-index-creation: true

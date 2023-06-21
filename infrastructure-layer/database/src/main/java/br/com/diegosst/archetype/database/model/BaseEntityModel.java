@@ -4,7 +4,7 @@ import br.com.diegosst.archetype.domain.entity.BaseEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "base_entity")
+@Document(collection = "base-entity")
 public class BaseEntityModel extends BaseEntity {
 
     @Id

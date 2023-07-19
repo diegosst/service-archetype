@@ -16,7 +16,6 @@
     <modules>
         <module>database</module>
         <module>eventsource</module>
-        <module>cache</module>
     </modules>
 
 </project>

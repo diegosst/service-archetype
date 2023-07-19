@@ -8,6 +8,7 @@ import br.com.diegosst.archetype.domain.exception.EntityNotFoundException;
 import br.com.diegosst.archetype.event.BaseEntityEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class SimpleServiceImpl implements SimpleService {
     private final SimpleRepository simpleRepository;
     private final SimpleEventSource simpleEventSource;
 
+    @Cacheable(value = "small", key = "#id")
     @Override
     public BaseEntity getBaseEntityById(final String id) {
         return simpleRepository.findBaseEntityById(id)

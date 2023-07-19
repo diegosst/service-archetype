@@ -1,4 +1,4 @@
-package br.com.diegosst.archetype.cache.redis.config;
+package br.com.diegosst.archetype.config;
 
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.context.annotation.Bean;

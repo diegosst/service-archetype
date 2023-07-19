@@ -9,6 +9,8 @@ import br.com.diegosst.archetype.event.BaseEntityEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SimpleServiceImpl implements SimpleService {
@@ -20,6 +22,11 @@ public class SimpleServiceImpl implements SimpleService {
     public BaseEntity getBaseEntityById(final String id) {
         return simpleRepository.findBaseEntityById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Could not find an entity for the given id."));
+    }
+
+    @Override
+    public List<BaseEntity> getAllBaseEntity() {
+        return simpleRepository.findAllBaseEntities();
     }
 
     @Override

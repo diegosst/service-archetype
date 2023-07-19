@@ -9,8 +9,5 @@ COPY ./ ./
 # BUILD PROJECT
 RUN mvn clean install
 
-# Set the entrypoint to run the script
-ENTRYPOINT ["./entrypoint.sh"]
-
 # DEFAULT COMMAND
 CMD ["mvn", "-pl", "server", "spring-boot:run"]

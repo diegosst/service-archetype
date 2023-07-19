@@ -2,11 +2,14 @@ package br.com.diegosst.archetype.application.api.controller;
 
 import br.com.diegosst.archetype.adapter.input.SimpleService;
 import br.com.diegosst.archetype.domain.entity.BaseEntity;
+import br.com.diegosst.archetype.event.BaseEntityEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/simple-api")
@@ -14,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class SimpleController {
 
     private final SimpleService simpleService;
+
+    @GetMapping
+    public ResponseEntity<List<BaseEntity>> getAllBaseEntity() {
+        return new ResponseEntity(simpleService.getAllBaseEntity(), HttpStatus.OK);
+    }
 
     @Cacheable(value = "small", key = "#id")
     @GetMapping("/{id}")
@@ -23,6 +31,7 @@ public class SimpleController {
 
     @PostMapping
     public ResponseEntity publishBaseEntity(@RequestBody final BaseEntity entity) {
+        simpleService.publishBaseEntity(new BaseEntityEvent(entity.getId()));
         return new ResponseEntity(HttpStatus.OK);
     }
 

@@ -27,11 +27,9 @@ services:
     ports:
       - '27017:27017'
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-archetype}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PWD:-archetype}
       - MONGO_INITDB_DATABASE=${MONGO_DB:-archetype}
-      - MONGO_DB_USERNAME=${MONGO_USER:-archetype}
-      - MONGO_DB_PASSWORD=${MONGO_PWD:-archetype}
     networks:
       - service-network
 

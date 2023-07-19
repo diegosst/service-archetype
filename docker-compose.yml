@@ -27,19 +27,13 @@ services:
     ports:
       - '27017:27017'
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-admin}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PWD:-admin}
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=${MONGO_DB:-archetype}
+      - MONGO_DB_USERNAME=${MONGO_USER:-archetype}
+      - MONGO_DB_PASSWORD=${MONGO_PWD:-archetype}
     networks:
       - service-network
-
-  mongo-express:
-    image: 'mongo-express:latest'
-    ports:
-      - '8081:8081'
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USER:-admin}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PWD:-admin}
-      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER:-admin}:${MONGO_PWD:-admin}@mongodb:27017/
 
   service:
     container_name: ${SERVICE_NAME:-archetype-service}
@@ -49,6 +43,10 @@ services:
       - '9000:8080'
     env_file:
       - .env
+    depends_on:
+      - mongodb
+      - rabbitmq
+      - redis
     networks:
       - service-network
 

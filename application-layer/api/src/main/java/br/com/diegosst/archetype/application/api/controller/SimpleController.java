@@ -3,6 +3,7 @@ package br.com.diegosst.archetype.application.api.controller;
 import br.com.diegosst.archetype.adapter.input.SimpleService;
 import br.com.diegosst.archetype.domain.entity.BaseEntity;
 import br.com.diegosst.archetype.event.BaseEntityEvent;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,12 @@ public class SimpleController {
 
     @Cacheable(value = "small", key = "#id")
     @GetMapping("/{id}")
-    public ResponseEntity<BaseEntity> getBaseEntityById(@PathVariable(value = "id") final String id) {
+    public ResponseEntity<BaseEntity> getBaseEntityByName(@PathVariable(value = "id") final String id) {
         return new ResponseEntity(simpleService.getBaseEntityById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity publishBaseEntity(@RequestBody final BaseEntity entity) {
+    public ResponseEntity publishBaseEntity(@RequestBody final BaseEntity entity) throws JsonProcessingException {
         simpleService.publishBaseEntity(new BaseEntityEvent(entity.getId()));
         return new ResponseEntity(HttpStatus.OK);
     }

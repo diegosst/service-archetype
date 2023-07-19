@@ -6,6 +6,7 @@ import br.com.diegosst.archetype.adapter.output.SimpleRepository;
 import br.com.diegosst.archetype.domain.entity.BaseEntity;
 import br.com.diegosst.archetype.domain.exception.EntityNotFoundException;
 import br.com.diegosst.archetype.event.BaseEntityEvent;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class SimpleServiceImpl implements SimpleService {
     }
 
     @Override
-    public void publishBaseEntity(final BaseEntityEvent event) {
+    public void publishBaseEntity(final BaseEntityEvent event) throws JsonProcessingException {
         simpleEventSource.publishBaseEntity(event);
     }
 }

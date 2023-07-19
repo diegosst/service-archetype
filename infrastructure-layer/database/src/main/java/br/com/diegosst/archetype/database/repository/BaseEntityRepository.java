@@ -11,8 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface BaseEntityRepository extends MongoRepository<BaseEntityModel, String> {
+
+    @Query(value = "SELECT e FROM BaseEntityModel e WHERE e.id = ?1")
     Optional<BaseEntity> findBaseEntityById(final String id);
 
-    @Query("SELECT e FROM BaseEntityModel")
+    @Query(value = "SELECT e FROM BaseEntityModel e")
     List<BaseEntity> findAllBaseEntities();
 }

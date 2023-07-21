@@ -34,5 +34,4 @@ public class SimpleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
 }

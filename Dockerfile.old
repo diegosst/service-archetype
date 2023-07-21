@@ -1,0 +1,35 @@
+# BUILD
+FROM maven:3.8.3-openjdk-17 as build
+ENV HOME=/opt/server
+RUN mkdir -p $HOME
+WORKDIR $HOME
+
+ADD pom.xml $HOME
+ADD application-layer/pom.xml $HOME/application-layer/pom.xml
+ADD domain-layer/pom.xml $HOME/domain-layer/pom.xml
+ADD domain-layer/adapter/pom.xml $HOME/domain-layer/adapter/pom.xml
+ADD domain-layer/domain/pom.xml $HOME/domain-layer/domain/pom.xml
+ADD infrastructure-layer/pom.xml $HOME/infrastructure-layer/pom.xml
+ADD infrastructure-layer/database/pom.xml $HOME/infrastructure-layer/database/pom.xml
+ADD infrastructure-layer/eventsource/pom.xml $HOME/infrastructure-layer/eventsource/pom.xml
+
+RUN mvn -pl application-layer verify --fail-never
+ADD application-layer $HOME/application-layer
+
+RUN mvn -pl domain-layer verify --fail-never
+ADD domain-layer $HOME/domain-layer
+
+RUN mvn -pl infrastructure-layer verify --fail-never
+ADD infrastructure-layer $HOME/infrastructure-layer
+
+RUN mvn -pl server verify --fail-never
+ADD server $HOME/server
+
+RUN mvn -pl application-layer/api,domain-layer/domain,domain-layer/adapter,infrastructure-layer/database,infrastructure-layer/eventsource,server package
+
+# START
+FROM openjdk:17-alpine
+
+COPY --from=build /opt/server/server/target/server-0.0.1.jar server.jar
+
+ENTRYPOINT java -jar server.jar

@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /${SERVICE_NAME}/api
+
 spring:
   component-scan:
     base-package: ${SCAN_BASE_PACKAGE:br.com.diegosst.archetype}

@@ -1,6 +1,6 @@
 package br.com.diegosst.archetype.eventsource.consumer;
 
-import br.com.diegosst.archetype.adapter.output.SimpleEventSource;
+import br.com.diegosst.archetype.adapter.output.ArchetypeEventSource;
 import br.com.diegosst.archetype.event.BaseEntityEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,19 +12,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SimpleEventConsumer {
+public class ArchetypeEventConsumer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleEventConsumer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArchetypeEventConsumer.class);
 
-    private static final String QUEUE_NAME = "simple-queue";
+    private static final String QUEUE_NAME = "archetype-queue";
 
-    private final SimpleEventSource simpleEventSource;
+    private final ArchetypeEventSource archetypeEventSource;
     private final ObjectMapper objectMapper;
 
     @RabbitListener(queues = QUEUE_NAME)
     public void handleBaseEntityEvent(final String message) {
         try {
-            simpleEventSource.storeBaseEntity(objectMapper.readValue(message, BaseEntityEvent.class));
+            archetypeEventSource.storeBaseEntity(objectMapper.readValue(message, BaseEntityEvent.class));
         } catch (JsonProcessingException e) {
             LOG.error("Could not process message as Base Entity Event.", e);
         }

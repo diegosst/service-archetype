@@ -1,6 +1,6 @@
 package br.com.diegosst.archetype.database.output.impl;
 
-import br.com.diegosst.archetype.adapter.output.SimpleRepository;
+import br.com.diegosst.archetype.adapter.output.ArchetypeRepository;
 import br.com.diegosst.archetype.database.mapper.BaseEntityModelMapper;
 import br.com.diegosst.archetype.database.repository.BaseEntityRepository;
 import br.com.diegosst.archetype.domain.entity.BaseEntity;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class SimpleRepositoryImpl implements SimpleRepository {
+public class ArchetypeRepositoryImpl implements ArchetypeRepository {
 
     private final BaseEntityRepository baseEntityRepository;
 

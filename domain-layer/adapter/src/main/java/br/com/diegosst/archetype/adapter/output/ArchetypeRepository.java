@@ -5,7 +5,7 @@ import br.com.diegosst.archetype.domain.entity.BaseEntity;
 import java.util.List;
 import java.util.Optional;
 
-public interface SimpleRepository {
+public interface ArchetypeRepository {
 
     Optional<BaseEntity> findBaseEntityById(final String id);
     List<BaseEntity> findAllBaseEntities();

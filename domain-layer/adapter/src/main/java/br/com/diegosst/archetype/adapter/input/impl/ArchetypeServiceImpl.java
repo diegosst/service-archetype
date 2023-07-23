@@ -1,8 +1,8 @@
 package br.com.diegosst.archetype.adapter.input.impl;
 
-import br.com.diegosst.archetype.adapter.input.SimpleService;
-import br.com.diegosst.archetype.adapter.output.SimpleEventSource;
-import br.com.diegosst.archetype.adapter.output.SimpleRepository;
+import br.com.diegosst.archetype.adapter.input.ArchetypeService;
+import br.com.diegosst.archetype.adapter.output.ArchetypeEventSource;
+import br.com.diegosst.archetype.adapter.output.ArchetypeRepository;
 import br.com.diegosst.archetype.domain.entity.BaseEntity;
 import br.com.diegosst.archetype.domain.exception.EntityNotFoundException;
 import br.com.diegosst.archetype.event.BaseEntityEvent;
@@ -15,25 +15,25 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SimpleServiceImpl implements SimpleService {
+public class ArchetypeServiceImpl implements ArchetypeService {
 
-    private final SimpleRepository simpleRepository;
-    private final SimpleEventSource simpleEventSource;
+    private final ArchetypeRepository archetypeRepository;
+    private final ArchetypeEventSource archetypeEventSource;
 
     @Cacheable(value = "small", key = "#id")
     @Override
     public BaseEntity getBaseEntityById(final String id) {
-        return simpleRepository.findBaseEntityById(id)
+        return archetypeRepository.findBaseEntityById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Could not find an entity for the given id."));
     }
 
     @Override
     public List<BaseEntity> getAllBaseEntity() {
-        return simpleRepository.findAllBaseEntities();
+        return archetypeRepository.findAllBaseEntities();
     }
 
     @Override
     public void publishBaseEntity(final BaseEntityEvent event) throws JsonProcessingException {
-        simpleEventSource.publishBaseEntity(event);
+        archetypeEventSource.publishBaseEntity(event);
     }
 }

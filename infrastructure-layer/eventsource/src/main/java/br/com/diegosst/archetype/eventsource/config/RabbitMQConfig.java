@@ -12,21 +12,21 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Bean
-    public Queue simpleQueue() {
-        return new Queue("simple-queue", true);
+    public Queue archetypeQueue() {
+        return new Queue("archetype-queue", true);
     }
 
     @Bean
-    public TopicExchange simpleExchange() {
-        return new TopicExchange("simple-exchange");
+    public TopicExchange archetypeExchange() {
+        return new TopicExchange("archetype-exchange");
     }
 
     @Bean
     public Binding binding() {
         return BindingBuilder
-                .bind(simpleQueue())
-                .to(simpleExchange())
-                .with("simple-event");
+                .bind(archetypeQueue())
+                .to(archetypeExchange())
+                .with("archetype-event");
     }
 
 }

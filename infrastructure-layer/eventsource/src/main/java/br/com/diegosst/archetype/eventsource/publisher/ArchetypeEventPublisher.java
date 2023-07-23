@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SimpleEventPublisher {
+public class ArchetypeEventPublisher {
     private final AmqpTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
 
     public void publishEntity(final BaseEntityEvent event) throws JsonProcessingException {
         final String message = objectMapper.writeValueAsString(event);
-        rabbitTemplate.convertAndSend("simple-exchange", "simple-event", message);
+        rabbitTemplate.convertAndSend("archetype-exchange", "archetype-event", message);
     }
 }

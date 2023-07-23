@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
 
-public interface SimpleService {
+public interface ArchetypeService {
 
     BaseEntity getBaseEntityById(final String id);
 

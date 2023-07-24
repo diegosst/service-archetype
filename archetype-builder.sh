@@ -72,16 +72,18 @@ build_archetype() {
 }
 
 # Check if the script is called with the correct number of arguments
-if [ $# -ne 4 ]; then
-  echo "Usage: $0 <folder> <new_folder> <from> <to>"
+if [ $# -ne 3 || $# -ne 4 ]; then
+  echo "Usage: $0 <folder> <new_folder> <service_name> [optional: company_name]"
   exit 1
 fi
 
 # Get the arguments
 folder="$1"
 new_folder="$2"
-from="$3"
-to="$4"
+from="archetype"
+service_name="$3"
+current_company_name="diegosst"
+company_name="$4"
 
 # Check if the folder exists before proceeding
 if [ ! -d "$folder" ]; then
@@ -99,11 +101,16 @@ echo "Copying all files to the new folder structure."
 
 cp -r "$folder/" "$new_folder/"
 
-# Give permissions
-chmod u+w $new_folder
+# Give permissions recursively
+chmod -R u+w "$new_folder"
 
 echo "Files copied successfully."
 
-build_archetype "$new_folder" "$(capitalize_first_letter "$from")" "$(capitalize_first_letter "$to")"
-build_archetype "$new_folder" "$(capitalize_text "$from")" "$(capitalize_text "$to")"
-build_archetype "$new_folder" "$(lowercase_text "$from")" "$(lowercase_text "$to")"
+build_archetype "$new_folder" "$(capitalize_first_letter "$from")" "$(capitalize_first_letter "$service_name")"
+build_archetype "$new_folder" "$(capitalize_text "$from")" "$(capitalize_text "$service_name")"
+build_archetype "$new_folder" "$(lowercase_text "$from")" "$(lowercase_text "$service_name")"
+
+if [ ! -z "$company_name" ]; then
+  echo "No company name provided. Skipping company name replacement."
+  build_archetype "$new_folder" "$(lowercase_text "$current_company_name")" "$(lowercase_text "$company_name")"
+fi

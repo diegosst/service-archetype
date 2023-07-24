@@ -30,7 +30,7 @@ sh archetype-builder.sh <folder> <new_folder> <service_name> [optional: company_
 Generate a service archetype named "price-service" based on the contents of the "service" folder:
 
 ```bash
-sh archetype-builder.sh service price-service price
+./archetype-builder.sh service price-service price
 ```
 
 ### Example 2:
@@ -38,7 +38,7 @@ sh archetype-builder.sh service price-service price
 Generate a service archetype named "price-service" for the company "mycompany" based on the contents of the "service" folder:
 
 ```bash
-sh archetype-builder.sh service price-service price mycompany
+./archetype-builder.sh service price-service price mycompany
 ```
 
 ## Notes

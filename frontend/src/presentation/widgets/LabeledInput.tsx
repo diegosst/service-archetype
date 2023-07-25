@@ -1,7 +1,12 @@
 import React from 'react';
 import './labeled-input.scss';
 
-function LabeledInput({ label, placeholder }) {
+type LabeledInputProps = {
+  label: string;
+  placeholder: string;
+};
+
+function LabeledInput({ label, placeholder } : LabeledInputProps) {
   return (
     <div className="section">
       <span className="label">{label}</span>

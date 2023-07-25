@@ -33,6 +33,11 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  background-color: #2d2d2d;
+}
+
 input {
   display: inline-block;
   padding: 10px 16px;

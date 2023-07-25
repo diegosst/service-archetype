@@ -1,4 +1,4 @@
-.price-view {
+.archetype-view {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -15,5 +15,9 @@
 
   .buttons-section {
     padding-top: 10px;
+  }
+
+  .entity-list {
+    padding-top: 50px;
   }
 }

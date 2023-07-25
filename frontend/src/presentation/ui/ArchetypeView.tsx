@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BaseEntity } from '../../domain/models/BaseEntity';
+import { BaseEntityService } from '../../application/services/BaseEntityService';
+
+
 import LabeledInput from '../widgets/LabeledInput';
+
 import './archetype-view.scss';
 
 function ArchetypeView() {
+
   return (
     <div className="archetype-view">
       <header className="header">
